@@ -1,0 +1,50 @@
+version: '2.0'
+services:
+  db:
+    image: mariadb:10.5
+    container_name: seafile-mysql
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}
+      - MYSQL_LOG_CONSOLE=true
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - seafile-net
+
+  memcached:
+    image: memcached:alpine
+    container_name: seafile-memcached
+    restart: unless-stopped
+    networks:
+      - seafile-net
+
+  seafile:
+    image: seafileltd/seafile-mc:10.0.1-pro
+    container_name: seafile
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - seafile-data:/shared
+    env_file:
+      - ./seafile.env
+    environment:
+      - DB_HOST=db
+      - DB_ROOT_PASSWD=${DB_ROOT_PASS}
+      - SEAFILE_ADMIN_EMAIL=${SEAFILE_ADMIN_EMAIL}
+      - SEAFILE_ADMIN_PASSWORD=${SEAFILE_ADMIN_PASSWORD}
+      - SEAFILE_SERVER_HOSTNAME=${SEAFILE_SERVER_HOSTNAME}
+      - SEAFILE_SERVER_LETSENCRYPT=false
+    depends_on:
+      - db
+      - memcached
+    networks:
+      - seafile-net
+
+volumes:
+  db-data:
+  seafile-data:
+
+networks:
+  seafile-net:
