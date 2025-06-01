@@ -1,0 +1,4 @@
+# Ignore secrets if any
+*.bak
+*.log
+.env
