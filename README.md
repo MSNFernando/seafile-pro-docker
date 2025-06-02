@@ -31,6 +31,8 @@ Edit the following files to match your environment:
 
 ```bash
 wget https://raw.githubusercontent.com/MSNFernando/seafile-pro-easy-install/refs/heads/main/install-seafile-v2.sh -o install-seafile.sh
+chmod +x install-seafile.sh
+./install-seafile.sh
 ```
 Update the .env file with your relevant information. The easy install script will copy the seafile.env into .env which is required to run the docker
 After updating the .env file
