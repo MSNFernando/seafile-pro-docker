@@ -4,8 +4,10 @@ services:
     image: mariadb:10.5
     container_name: seafile-mysql
     restart: unless-stopped
+    env_file:
+      - ./seafile.env
     environment:
-      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}
+      - MARIADB_ROOT_PASSWORD=${DB_ROOT_PASS}
       - MYSQL_LOG_CONSOLE=true
     volumes:
       - db-data:/var/lib/mysql
