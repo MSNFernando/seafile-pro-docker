@@ -8,7 +8,10 @@ This repository contains a ready-to-deploy setup for **SeaFile Pro** using Docke
 
 - Docker & Docker Compose
 - A running MinIO server
-- A bucket called `seafile-data` created on MinIO
+- 3 buckets created on MinIO called
+  - `seafile-commit`
+  - `seafile-block`
+  - `seafile-fs`
 - Valid SeaFile Pro license (upload via web UI after setup)
 
 ---
@@ -27,9 +30,10 @@ Edit the following files to match your environment:
 ## 🚀 Deployment
 
 ```bash
-git clone https://github.com/MSNFernando/seafile-pro-docker.git
-cd seafile-pro-docker
-
-# Optional: edit seafile.env
-
+wget https://raw.githubusercontent.com/MSNFernando/seafile-pro-easy-install/refs/heads/main/install-seafile-v2.sh -o install-seafile.sh
+```
+Update the .env file with your relevant information. The easy install script will copy the seafile.env into .env which is required to run the docker
+After updating the .env file
+```bash
 docker compose up -d
+```
