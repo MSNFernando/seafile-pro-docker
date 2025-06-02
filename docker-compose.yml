@@ -131,7 +131,7 @@ services:
       db:
         condition: service_healthy
     networks:
-      - seafile-net 
+      - seafile-net
 
   caddy:
     image: ${SEAFILE_CADDY_IMAGE:-lucaslorentz/caddy-docker-proxy:2.9-alpine}
