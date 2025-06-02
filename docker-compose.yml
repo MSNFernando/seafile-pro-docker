@@ -20,7 +20,7 @@ services:
       - seafile-net
 
   seafile:
-    image: seafileltd/seafile-mc:10.0.1-pro
+    image: seafileltd/seafile-pro-mc:12.0-latest
     container_name: seafile
     restart: unless-stopped
     ports:
