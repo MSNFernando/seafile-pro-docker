@@ -4,11 +4,7 @@ services:
     image: mariadb:10.5
     container_name: seafile-mysql
     restart: unless-stopped
-    env_file:
-      - ./seafile.env
-    environment:
-      - MARIADB_ROOT_PASSWORD=${DB_ROOT_PASS}
-      - MYSQL_LOG_CONSOLE=true
+    env_file: .env
     volumes:
       - db-data:/var/lib/mysql
     networks:
@@ -29,15 +25,7 @@ services:
       - "80:80"
     volumes:
       - seafile-data:/shared
-    env_file:
-      - ./seafile.env
-    environment:
-      - DB_HOST=db
-      - DB_ROOT_PASSWD=${DB_ROOT_PASS}
-      - SEAFILE_ADMIN_EMAIL=${SEAFILE_ADMIN_EMAIL}
-      - SEAFILE_ADMIN_PASSWORD=${SEAFILE_ADMIN_PASSWORD}
-      - SEAFILE_SERVER_HOSTNAME=${SEAFILE_SERVER_HOSTNAME}
-      - SEAFILE_SERVER_LETSENCRYPT=false
+    env_file: .env
     depends_on:
       - db
       - memcached
